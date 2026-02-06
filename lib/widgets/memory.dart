@@ -7,10 +7,10 @@ class MemoryMonitor extends StatefulWidget {
   const MemoryMonitor({super.key});
 
   @override
-  _MemoryMonitorState createState() => _MemoryMonitorState();
+  MemoryMonitorState createState() => MemoryMonitorState();
 }
 
-class _MemoryMonitorState extends State<MemoryMonitor> {
+class MemoryMonitorState extends State<MemoryMonitor> {
   late ReceivePort _receivePort;
   late Stream<dynamic> _broadcastStream;
 
@@ -38,8 +38,6 @@ class _MemoryMonitorState extends State<MemoryMonitor> {
         final totalValue = int.parse(total.split(' ')[0]);
         final used = totalValue - int.parse(available.split(' ')[0]);
         final percent = (used / totalValue) * 100;
-
-        print(data);  
         
         return Column(
           children: [

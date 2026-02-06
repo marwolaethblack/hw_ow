@@ -8,7 +8,7 @@ void hardwareWorker(SendPort sendPort) async {
   Timer.periodic(const Duration(seconds: 1), (timer) async {
     try {
 
-      final memInfo = await getMemoryStats();
+      final memInfo = await getMemoryUsage();
 
       // Send the data back as a Map
       sendPort.send({
