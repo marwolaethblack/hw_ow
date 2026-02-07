@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hw_ow/widgets/cpu_core_grid.dart';
 
 class CpuMonitorWidget extends StatelessWidget {
   final Map<String, dynamic> cpuData;
 
-  const CpuMonitorWidget({
-    super.key,
-    required this.cpuData,
-  });
+  const CpuMonitorWidget({super.key, required this.cpuData});
 
   // Helper to determine color based on temperature severity
   Color _getTempColor(double temp) {
@@ -27,6 +25,7 @@ class CpuMonitorWidget extends StatelessWidget {
     // Extract values with null-safety fallbacks
     final double load = (cpuData['load'] ?? 0.0);
     final double temp = (cpuData['temp'] ?? 0.0);
+    final List<double> cores = List<double>.from(cpuData['cores'] ?? []);
 
     return Card(
       color: Colors.grey[900],
@@ -69,6 +68,22 @@ class CpuMonitorWidget extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 16),
+            const Divider(color: Colors.white10),
+            const SizedBox(height: 8),
+
+            const Text(
+              "CORE FREQUENCIES",
+              style: TextStyle(
+                color: Colors.white54,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+
+            // Add the Grid here
+            CpuCoreGrid(cores: cores),
           ],
         ),
       ),
@@ -88,7 +103,10 @@ class CpuMonitorWidget extends StatelessWidget {
           children: [
             Icon(icon, size: 14, color: Colors.white38),
             const SizedBox(width: 4),
-            Text(label, style: const TextStyle(color: Colors.white38, fontSize: 10)),
+            Text(
+              label,
+              style: const TextStyle(color: Colors.white38, fontSize: 10),
+            ),
           ],
         ),
         const SizedBox(height: 4),
@@ -98,7 +116,8 @@ class CpuMonitorWidget extends StatelessWidget {
             color: valueColor,
             fontSize: 24,
             fontWeight: FontWeight.w900,
-            fontFamily: 'monospace', // Monospaced keeps the text from jumping around
+            fontFamily:
+                'monospace', // Monospaced keeps the text from jumping around
           ),
         ),
       ],
