@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hw_ow/widgets/cpu_core_grid.dart';
+import 'package:hw_ow/widgets/sensors/cpu/cpu_core_grid.dart';
 
 class CpuMonitorWidget extends StatelessWidget {
   final Map<String, dynamic> cpuData;

@@ -5,7 +5,7 @@ import 'package:hw_ow/sensors/cpu.dart';
 import 'package:hw_ow/sensors/mem.dart';
 
 // This is the entry point for our background worker
-void hardwareWorker(SendPort sendPort) async {
+void sensorWorker(SendPort sendPort) async {
   Timer.periodic(const Duration(seconds: 1), (timer) async {
     try {
 

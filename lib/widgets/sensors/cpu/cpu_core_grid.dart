@@ -11,7 +11,7 @@ class CpuCoreGrid extends StatelessWidget {
       shrinkWrap: true, // Crucial for use inside a Column/ListView
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 6, // 4 cores per row
+        crossAxisCount: 6, // 6 cores per row
         crossAxisSpacing: 8,
         mainAxisSpacing: 8,
         childAspectRatio: 2.5, // Keeps the boxes rectangular

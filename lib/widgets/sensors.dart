@@ -1,14 +1,13 @@
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:hw_ow/hw_reader.dart';
-import 'package:hw_ow/lshw/hardware_node.dart';
-import 'package:hw_ow/sensors/mem.dart';
-import 'package:hw_ow/widgets/cpu.dart';
-import 'package:hw_ow/widgets/memory.dart';
+import 'package:hw_ow/sensor_reader.dart';
+import 'package:hw_ow/widgets/sensors/cpu/cpu.dart';
+import 'package:hw_ow/widgets/sensors/memory.dart';
 
 class Sensors extends StatefulWidget {
   const Sensors({super.key});
+
 
   @override
   SensorsState createState() => SensorsState();
@@ -17,15 +16,8 @@ class Sensors extends StatefulWidget {
 class SensorsState extends State<Sensors> {
   late ReceivePort _receivePort;
   late Stream<dynamic> _broadcastStream;
-  late List<HardwareNode> _sticks;
 
-  void loadRamData() async {
-  final sticks = await getPhysicalMemoryInfo();
-  
-    setState(() {
-      _sticks = sticks;
-    });
-} 
+
 
   @override
   void initState() {
@@ -34,8 +26,7 @@ class SensorsState extends State<Sensors> {
     // Convert the ReceivePort into a broadcast stream for the UI
     _broadcastStream = _receivePort.asBroadcastStream();
     // Spawn the background worker
-    Isolate.spawn(hardwareWorker, _receivePort.sendPort);
-    _sticks = [];
+    Isolate.spawn(sensorWorker, _receivePort.sendPort);
   }
 
   @override

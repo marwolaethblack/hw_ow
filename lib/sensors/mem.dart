@@ -32,7 +32,7 @@ Future<Map<String, String>> getMemoryUsage() async {
 }
 
 Future<List<HardwareNode>> getPhysicalMemoryInfo() async {
-  final result = await Process.run('pkexec', ['lshw', '-C', 'memory', '-json']);
+  final result = await Process.run('pkexec', ['lshw', '-json']);
 
   List<HardwareNode> allSticks = [];
 
