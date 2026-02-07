@@ -35,4 +35,26 @@ class HardwareParser {
 
     return sticks;
   }
+
+  /// Specifically finds the CPU node(s) within the hardware tree
+  static List<HardwareNode> findCpus(HardwareNode root) {
+    List<HardwareNode> cpus = [];
+
+    // lshw classifies CPUs as 'processor'
+    // We also check for 'product' to ensure it's not a generic container
+    if (root.classType == 'processor' && root.product != null) {
+      cpus.add(root);
+    }
+
+    // Recurse through children
+    if (root.children != null) {
+      for (var child in root.children!) {
+        cpus.addAll(findCpus(child));
+      }
+    }
+
+    return cpus;
+  }
 }
+
+
